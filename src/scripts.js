@@ -1,11 +1,13 @@
 (function () {
 let sparklingCount = 0,
     dustyCount = 0,
-    rancidCount = 0;
-
+    rancidCount = 0,
+    garageItems = [];
 
 $('.show-garage').on('click', '.show-items-butn', (event) => openDoor(event));
 $('.input-form').on('click', '.submit-button', (event) => addItem());
+$('.show-garage').on('click', '.sort-items-up-butn', (event) => sortAsc());
+$('.show-garage').on('click', '.sort-items-down-butn', (event) => sortDsc());
 
 $(document).ready(() => fetchItems());
 
@@ -22,6 +24,7 @@ const fetchItems = () => {
 
 const appendItems = (items) => {
   items.forEach((item) => {
+    garageItems.push(item)
     $('.items').append(
       `<div class="appended-items">
         <li>Item Name: ${item.itemName}</li>
@@ -44,7 +47,6 @@ const appendItems = (items) => {
           break;
           default:
       }
-
   })
   $('.item-count').text($('.items .appended-items').length)
 }
@@ -69,5 +71,39 @@ const addItem = () => {
   .then(item => appendItems(item))
   .catch(error => console.log(error))
 }
+
+const sortAsc = () => {
+  $('.items').html('');
+  let sortedArray = garageItems.sort((a, b) => {
+    if (a.itemName < b.itemName)
+      return -1;
+    if (a.itemName > b.itemName)
+      return 1;
+  return 0;
+  });
+  garageItems = [];
+  sparklingCount = 0;
+  dustyCount = 0;
+  rancidCount = 0
+  appendItems(sortedArray);
+}
+
+const sortDsc = () => {
+  $('.items').html('');
+  let sortedArray = garageItems.sort((a, b) => {
+    if (a.itemName < b.itemName)
+      return -1;
+    if (a.itemName > b.itemName)
+      return 1;
+  return 0;
+  });
+  sortedArray.reverse();
+  garageItems = [];
+  sparklingCount = 0;
+  dustyCount = 0;
+  rancidCount = 0
+  appendItems(sortedArray);
+}
+
 
 })();
