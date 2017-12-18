@@ -14,51 +14,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
-
-app.post('/api/v1/authenticate', (request, response) => {
-
-});
-
-app.get('/api/v1/', (request, response) => {
-  database('').select()
-    .then(owners => response.status(200).json(owners))
+app.get('/api/v1/items', (request, response) => {
+  database('garage_things').select()
+    .then(items => response.status(200).json(items))
     .catch(error => response.status(500).json({error: `internal server error ${error}`}));
 });
 
-app.get('/api/v1/owners/:id', (request, response) => {
+app.post('/api/v1/', (request, response) => {
 
 });
 
-app.get('/api/v1/homes', (request, response) => {
+app.post('/api/v1/', (request, response) => {
 
 });
 
-app.get('/api/v1/owners/:id/homes', (request, response) => {
-
-});
-
-
-app.post('/api/v1/owners', (request, response) => {
-
-});
-
-app.post('/api/v1/owners/:id/homes', (request, response) => {
-
-});
-
-app.put('/api/v1/owners/:id', (request, response) => {
-
-});
-
-app.put('/api/v1/homes/:id', (request, response) => {
-
-});
-
-app.delete('/api/v1/owners/:id', (request, response) => {
-
-});
-
-app.delete('/api/v1/homes/:id', (request, response) => {
+app.delete('/api/v1/', (request, response) => {
 
 });
 
