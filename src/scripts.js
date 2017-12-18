@@ -1,4 +1,8 @@
 (function () {
+let sparklingCount = 0,
+    dustyCount = 0,
+    rancidCount = 0;
+
 
 $('.show-garage').on('click', '.show-items-butn', (event) => openDoor(event));
 $('.input-form').on('click', '.submit-button', (event) => addItem());
@@ -26,6 +30,23 @@ const appendItems = (items) => {
         <li>Item Cleanliness: ${item.itemCleanliness}</li>
       </div>`
       )
+      switch (item.itemCleanliness.toLowerCase()) {
+        case 'sparkling':
+          sparklingCount++;
+          $('.sparkling-count').text(sparklingCount)
+          break;
+        case 'dusty':
+          dustyCount++;
+          $('.dusty-count').text(dustyCount)
+          break;
+        case 'rancid':
+          rancidCount++;
+          $('.rancid-count').text(rancidCount)
+          break;
+          default:
+          console.log(rancidCount);
+      }
+
   })
   $('.item-count').text($('.items .appended-items').length)
 }
