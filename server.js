@@ -36,8 +36,19 @@ app.post('/api/v1/items', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-app.post('/api/v1/', (request, response) => {
+app.get('/api/v1/items/:id', (request, response) => {
+  const id = request.params.id;
 
+  database('garage_things').where('id', id).select()
+    .then(item => {
+      item.length ? response.status(200).json(item)
+        :
+        response.status(404).json({
+          error: `Could not find item with id: ${id}`
+        });
+    })
+    .catch(error => response.status(500).json({error})
+    );
 });
 
 app.delete('/api/v1/', (request, response) => {
