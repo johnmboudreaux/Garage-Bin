@@ -127,23 +127,20 @@ describe('API Routes', () => {
     });
   });
 
+  //happy
   describe('GET /api/v1/items/:id', () => {
     it('should return a specific item', (done) => {
       chai.request(server)
-        .get('/api/v1/owners/1/homes')
+        .get('/api/v1/items/1')
         .then((response) => {
           response.should.have.status(200);
           response.should.be.json;
           response.body.should.be.a('array');
-          response.body.length.should.equal(3);
+          response.body.length.should.equal(1);
           response.body[0].id.should.equal(1);
-          response.body[0].houseName.should.equal('Cloud House');
-          response.body[0].description.should.equal('Lorem ipsum dolor sit amet, nam ea impetus discere, vel laoreet accumsan noluisse an. Altera petentium eos et, ei commodo virtute sanctus mei.');
-          response.body[0].houseAddress.should.equal('2104 Westfall Avenue');
-          response.body[0].bathrooms.should.equal(5);
-          response.body[0].bedrooms.should.equal(5);
-          response.body[0].zipCode.should.equal(80221);
-          response.body[0].ownerId.should.equal(1);
+          response.body[0].itemName.should.equal('shays bicycle');
+          response.body[0].itemReason.should.equal('who knows');
+          response.body[0].itemCleanliness.should.equal('dusty');
           done();
         })
         .catch((error) => {
