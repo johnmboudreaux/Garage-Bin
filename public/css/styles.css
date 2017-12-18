@@ -42,3 +42,19 @@
   display: flex;
   justify-content: space-around;
 }
+
+.item-reason {
+  display: none;
+}
+
+.item-cleanliness {
+  display: none;
+}
+
+.show-all .item-reason {
+  display: inline-block;
+}
+
+.show-all .item-cleanliness {
+  display: inline-block;
+}

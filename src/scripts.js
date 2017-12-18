@@ -1,11 +1,14 @@
 (function () {
 let sparklingCount = 0,
     dustyCount = 0,
-    rancidCount = 0;
-
+    rancidCount = 0,
+    garageItems = [];
 
 $('.show-garage').on('click', '.show-items-butn', (event) => openDoor(event));
-$('.input-form').on('click', '.submit-button', (event) => addItem());
+$('.input-form').on('click', '.submit-button', () => addItem());
+$('.show-garage').on('click', '.sort-items-up-butn', () => sortAsc());
+$('.show-garage').on('click', '.sort-items-down-butn', () => sortDsc());
+$('.items').on('click', '.item-name', (event) => showDetails(event));
 
 $(document).ready(() => fetchItems());
 
@@ -21,13 +24,13 @@ const fetchItems = () => {
 }
 
 const appendItems = (items) => {
-  console.log('items', items);
   items.forEach((item) => {
+    garageItems.push(item)
     $('.items').append(
       `<div class="appended-items">
-        <li>Item Name: ${item.itemName}</li>
-        <li>Item Reason: ${item.itemReason}</li>
-        <li>Item Cleanliness: ${item.itemCleanliness}</li>
+        <li class="item-name">Item Name: ${item.itemName}</li>
+        <li class="item-reason">Item Reason: ${item.itemReason}</li>
+        <li class="item-cleanliness">Item Cleanliness: ${item.itemCleanliness}</li>
       </div>`
       )
       switch (item.itemCleanliness.toLowerCase()) {
@@ -44,9 +47,7 @@ const appendItems = (items) => {
           $('.rancid-count').text(rancidCount)
           break;
           default:
-          console.log(rancidCount);
       }
-
   })
   $('.item-count').text($('.items .appended-items').length)
 }
@@ -71,5 +72,44 @@ const addItem = () => {
   .then(item => appendItems(item))
   .catch(error => console.log(error))
 }
+
+const sortAsc = () => {
+  $('.items').html('');
+  let sortedArray = garageItems.sort((a, b) => {
+    if (a.itemName < b.itemName)
+      return -1;
+    if (a.itemName > b.itemName)
+      return 1;
+  return 0;
+  });
+  garageItems = [];
+  sparklingCount = 0;
+  dustyCount = 0;
+  rancidCount = 0
+  appendItems(sortedArray);
+}
+
+const sortDsc = () => {
+  $('.items').html('');
+  let sortedArray = garageItems.sort((a, b) => {
+    if (a.itemName < b.itemName)
+      return -1;
+    if (a.itemName > b.itemName)
+      return 1;
+  return 0;
+  });
+  sortedArray.reverse();
+  garageItems = [];
+  sparklingCount = 0;
+  dustyCount = 0;
+  rancidCount = 0
+  appendItems(sortedArray);
+}
+
+const showDetails = (event) => {
+  let $elemParent = $(event.target).parent();
+  $elemParent.toggleClass('show-all')
+}
+
 
 })();
