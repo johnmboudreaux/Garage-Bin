@@ -86,7 +86,6 @@
   };
 
   const appendItems = items => {
-    console.log('items', items);
     items.forEach(item => {
       $('.items').append(`<div class="appended-items">
         <li>Item Name: ${item.itemName}</li>
