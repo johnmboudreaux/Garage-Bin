@@ -11,14 +11,17 @@
   height: 65vh;
   width: 88vw;
   position: relative;
+  z-index: 2;
   float: left;
   margin: 5%;
-  box-sizing: border-box;
-  transition: border .7s ease;
   border-radius: 3px;
   box-shadow:
     0 0 10px #000,
     0 0 0 5px #fff;
+}
+
+.items {
+  color: black;
 }
 
 .slide-top{
@@ -26,11 +29,17 @@
   height: 100%;
   width: 100%;
   background-size: contain;
-  position: relative;
+  position: absolute;
   top: 0;
+  left: 0;
   transition: all 0.5s ease-in-out;
 }
 
 .slide-top.slide-open {
-  top: -62vh;
+  top: -65vh;
+}
+
+.appended-items {
+  display: flex;
+  justify-content: space-around;
 }

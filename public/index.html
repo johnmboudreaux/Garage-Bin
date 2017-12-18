@@ -11,12 +11,22 @@
 </head>
 <body>
   <div class="sliding-doors">
+    <ul class="items"></ul>
     <div class="slide-top"></div>
+  </div>
+  <div class="show-garage">
+    <input type="submit" value="Show Items" placeholder="Show Items" class="show-items-butn">
   </div>
 
   <div  class="input-form">
-    <input type="email" name="email" placeholder="Email" class="email-input">
-    <input type="text" placeholder="App Name" class="app-name">
+    <input type="text" placeholder="Item Name" class="item-to-add">
+    <input type="text" placeholder="Item Reason" class="item-to-add-reason">
+    <select type="text" placeholder="Item Cleanliness" class="item-to-add-cleanliness">
+      <option value="">Select Cleanliness</option>
+      <option value="Sparkling">Sparkling</option>
+      <option value="Dusty">Dusty</option>
+      <option value="Rancid">Rancid</option>
+    </select>
     <input type="submit" value="Submit" class="submit-button">
   </div>
 
