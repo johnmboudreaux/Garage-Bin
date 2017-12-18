@@ -25,9 +25,7 @@ app.post('/api/v1/items', (request, response) => {
 
   for (let requiredParameter of ['itemName', 'itemReason', 'itemCleanliness']) {
     if (!newItem[requiredParameter]) {
-      return response.status(422).json({
-        error: `you are missing the ${requiredParameter} property`
-      });
+      return response.status(422).json({ error: `you are missing the ${requiredParameter} property` });
     }
   }
 
@@ -43,12 +41,9 @@ app.get('/api/v1/items/:id', (request, response) => {
     .then(item => {
       item.length ? response.status(200).json(item)
         :
-        response.status(404).json({
-          error: `Could not find item with id: ${id}`
-        });
+        response.status(404).json({ error: `Could not find item with id: ${id}` });
     })
-    .catch(error => response.status(500).json({error})
-    );
+    .catch(error => response.status(500).json({ error: `Internal server error ${error}` }));
 });
 
 app.patch('/api/v1/items/:id', (request, response) => {
@@ -69,9 +64,7 @@ app.patch('/api/v1/items/:id', (request, response) => {
       }
       return response.sendStatus(204);
     })
-    .catch((error) => {
-      return response.status(500).json({ error });
-    });
+    .catch(error => response.status(500).json({error: `Internal server error ${error}`}));
 });
 
 app.listen(app.get('port'), () => {
