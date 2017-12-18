@@ -51,8 +51,27 @@ app.get('/api/v1/items/:id', (request, response) => {
     );
 });
 
-app.delete('/api/v1/', (request, response) => {
+app.patch('/api/v1/items/:id', (request, response) => {
+  const id = request.params.id;
+  const cleanlinessUpdate = request.body;
 
+  if (!cleanlinessUpdate) {
+    return response.status(422).json({
+      error: `an item with that id ${id} does not exist`
+    });
+  }
+
+  database('garage_things').where('id', id)
+    .update(cleanlinessUpdate, "*")
+    .then((update) => {
+      if (!update.length) {
+        return response.sendStatus(404);
+      }
+      return response.sendStatus(204);
+    })
+    .catch((error) => {
+      return response.status(500).json({ error });
+    });
 });
 
 app.listen(app.get('port'), () => {
