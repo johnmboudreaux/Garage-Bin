@@ -43,7 +43,6 @@ const appendItems = (items) => {
           $('.rancid-count').text(rancidCount)
           break;
           default:
-          console.log(rancidCount);
       }
 
   })

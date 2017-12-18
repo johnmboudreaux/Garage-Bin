@@ -106,7 +106,6 @@
           $('.rancid-count').text(rancidCount);
           break;
         default:
-          console.log(rancidCount);
       }
     });
     $('.item-count').text($('.items .appended-items').length);
