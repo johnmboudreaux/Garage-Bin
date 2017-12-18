@@ -2,7 +2,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgress://localhost/byob',
+    connection: 'postgress://localhost/garage_things',
     migrations: {
       directory: './db/migrations'
     },
@@ -13,7 +13,7 @@ module.exports = {
   },
   test: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/byob_test',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/garage_things_test',
     migrations: {
       directory: './db/migrations'
     },

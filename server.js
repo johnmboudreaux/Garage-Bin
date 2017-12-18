@@ -5,7 +5,6 @@ const app = express();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
-const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
@@ -20,8 +19,8 @@ app.post('/api/v1/authenticate', (request, response) => {
 
 });
 
-app.get('/api/v1/owners', (request, response) => {
-  database('home_owner').select()
+app.get('/api/v1/', (request, response) => {
+  database('').select()
     .then(owners => response.status(200).json(owners))
     .catch(error => response.status(500).json({error: `internal server error ${error}`}));
 });
