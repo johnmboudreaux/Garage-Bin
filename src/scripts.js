@@ -19,14 +19,15 @@ const fetchItems = () => {
 const appendItems = (items) => {
   console.log('items', items);
   items.forEach((item) => {
-    $('.items').append(`
-      <div class="appended-items">
+    $('.items').append(
+      `<div class="appended-items">
         <li>Item Name: ${item.itemName}</li>
         <li>Item Reason: ${item.itemReason}</li>
-        <li>Item Cleanliness: ${item.cleanliness}</li>
-      </div>
-      `)
+        <li>Item Cleanliness: ${item.itemCleanliness}</li>
+      </div>`
+      )
   })
+  $('.item-count').text($('.items .appended-items').length)
 }
 
 const addItem = () => {
