@@ -5,9 +5,10 @@ let sparklingCount = 0,
     garageItems = [];
 
 $('.show-garage').on('click', '.show-items-butn', (event) => openDoor(event));
-$('.input-form').on('click', '.submit-button', (event) => addItem());
-$('.show-garage').on('click', '.sort-items-up-butn', (event) => sortAsc());
-$('.show-garage').on('click', '.sort-items-down-butn', (event) => sortDsc());
+$('.input-form').on('click', '.submit-button', () => addItem());
+$('.show-garage').on('click', '.sort-items-up-butn', () => sortAsc());
+$('.show-garage').on('click', '.sort-items-down-butn', () => sortDsc());
+$('.items').on('click', '.item-name', (event) => showDetails(event));
 
 $(document).ready(() => fetchItems());
 
@@ -27,9 +28,9 @@ const appendItems = (items) => {
     garageItems.push(item)
     $('.items').append(
       `<div class="appended-items">
-        <li>Item Name: ${item.itemName}</li>
-        <li>Item Reason: ${item.itemReason}</li>
-        <li>Item Cleanliness: ${item.itemCleanliness}</li>
+        <li class="item-name">Item Name: ${item.itemName}</li>
+        <li class="item-reason">Item Reason: ${item.itemReason}</li>
+        <li class="item-cleanliness">Item Cleanliness: ${item.itemCleanliness}</li>
       </div>`
       )
       switch (item.itemCleanliness.toLowerCase()) {
@@ -103,6 +104,11 @@ const sortDsc = () => {
   dustyCount = 0;
   rancidCount = 0
   appendItems(sortedArray);
+}
+
+const showDetails = (event) => {
+  let $elemParent = $(event.target).parent();
+  $elemParent.toggleClass('show-all')
 }
 
 
