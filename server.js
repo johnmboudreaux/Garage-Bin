@@ -20,8 +20,20 @@ app.get('/api/v1/items', (request, response) => {
     .catch(error => response.status(500).json({error: `internal server error ${error}`}));
 });
 
-app.post('/api/v1/', (request, response) => {
+app.post('/api/v1/items', (request, response) => {
+  const newItem = request.body;
 
+  for (let requiredParameter of ['itemName', 'itemReason', 'itemCleanliness']) {
+    if (!newItem[requiredParameter]) {
+      return response.status(422).json({
+        error: `you are missing the ${requiredParameter} property`
+      });
+    }
+  }
+
+  database('garage_things').insert(newItem, '*')
+    .then(insertedItem => response.status(201).json(insertedItem))
+    .catch(error => response.status(500).json({ error }));
 });
 
 app.post('/api/v1/', (request, response) => {
