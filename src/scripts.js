@@ -9,6 +9,7 @@ $('.input-form').on('click', '.submit-button', () => addItem());
 $('.show-garage').on('click', '.sort-items-up-butn', () => sortAsc());
 $('.show-garage').on('click', '.sort-items-down-butn', () => sortDsc());
 $('.items').on('click', '.item-name', (event) => showDetails(event));
+$('.items').on('change', 'select', (event) => changeCleanliness(event));
 
 $(document).ready(() => fetchItems());
 
@@ -27,10 +28,16 @@ const appendItems = (items) => {
   items.forEach((item) => {
     garageItems.push(item)
     $('.items').append(
-      `<div class="appended-items">
+      `<div class="appended-items" id="item-${item.id}">
         <li class="item-name">Item Name: ${item.itemName}</li>
         <li class="item-reason">Item Reason: ${item.itemReason}</li>
-        <li class="item-cleanliness">Item Cleanliness: ${item.itemCleanliness}</li>
+        <li class="item-cleanliness">Item Cleanliness:
+        <select type="text" placeholder="Item Cleanliness" class="select-option-for-change">
+          <option ` + (item.itemCleanliness.toLowerCase().indexOf('sparkling') !== -1 ? `selected `: ``) + `value="Sparkling">Sparkling</option>
+          <option ` + (item.itemCleanliness.toLowerCase().indexOf('dusty') !== -1 ? `selected `: ``) + `value="Dusty">Dusty</option>
+          <option ` + (item.itemCleanliness.toLowerCase().indexOf('rancid') !== -1 ? `selected `: ``) +  `value="Rancid">Rancid</option>
+        </select>
+        </li>
       </div>`
       )
       switch (item.itemCleanliness.toLowerCase()) {
@@ -56,7 +63,7 @@ const addItem = () => {
   const itemName = $('.item-to-add').val();
   const itemReason = $('.item-to-add-reason').val();
   const itemCleanliness = $('.item-to-add-cleanliness').val();
-    let postBody = {
+  let postBody = {
     itemName: itemName,
     itemReason: itemReason,
     itemCleanliness: itemCleanliness
@@ -71,6 +78,22 @@ const addItem = () => {
   .then(response => response.json())
   .then(item => appendItems(item))
   .catch(error => console.log(error))
+}
+
+const changeCleanliness = (event) => {
+  let id = $(event.target).closest('.select-option-for-change').attr('id').split('-')[1];
+  console.log(id);
+  const itemCleanliness = $(event.target).val();
+  let postBody = {
+    itemCleanliness: itemCleanliness
+  }
+  fetch('/api/v1/items/:id', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(postBody)
+  })
 }
 
 const sortAsc = () => {
