@@ -58,8 +58,8 @@ app.patch('/api/v1/items/:id', (request, response) => {
 
   database('garage_things').where('id', id)
     .update(cleanlinessUpdate, "*")
-    .then((update) => {
-      if (!update.length) {
+    .then((updatedItem) => {
+      if (!updatedItem.length) {
         return response.sendStatus(404);
       }
       return response.sendStatus(204);

@@ -106,7 +106,7 @@ describe('API Routes', () => {
 
   //sad
   describe('POST /api/v1/items', () => {
-    it("should add new owner to owners", (done) => {
+    it("should add new item", (done) => {
       chai.request(server)
         .post('/api/v1/items')
         .send({
@@ -141,6 +141,24 @@ describe('API Routes', () => {
           response.body[0].itemName.should.equal('shays bicycle');
           response.body[0].itemReason.should.equal('who knows');
           response.body[0].itemCleanliness.should.equal('dusty');
+          done();
+        })
+        .catch((error) => {
+          throw error;
+        });
+    });
+  });
+
+  //sad
+  describe('GET /api/v1/items/:id', () => {
+    it('should return 404 error for item that does not exist', (done) => {
+      chai.request(server)
+        .get('/api/v1/items/100')
+        .then((response) => {
+          response.should.have.status(404);
+          response.should.be.json;
+          response.body.should.be.a('object');
+          response.body.error.should.equal('Could not find item with id: 100');
           done();
         })
         .catch((error) => {
