@@ -4,7 +4,8 @@
 }
 
 .sliding-doors {
-  font-family: 'Verdana';
+  display: flex;
+  flex-direction: column;
   font-weight: bold;
   overflow: hidden;
   height: 65vh;
@@ -19,8 +20,14 @@
     0 0 0 5px #fff;
 }
 
+.counts {
+  display: flex;
+  justify-content: space-around;
+}
+
 .items {
   color: black;
+  margin-bottom: 50px;
 }
 
 .slide-top{
@@ -39,8 +46,7 @@
 }
 
 .appended-items {
-  display: flex;
-  justify-content: space-around;
+margin: 5px;
 }
 
 .item-reason {

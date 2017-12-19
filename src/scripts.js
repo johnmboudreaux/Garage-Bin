@@ -29,9 +29,9 @@ const appendItems = (items) => {
     garageItems.push(item)
     $('.items').append(
       `<div class="appended-items" id="item-${item.id}">
-        <li class="item-name">Item Name: ${item.itemName}</li>
-        <li class="item-reason">Item Reason: ${item.itemReason}</li>
-        <li class="item-cleanliness">Item Cleanliness:
+        <li class="item-name">Name: ${item.itemName}</li>
+        <li class="item-reason">Reason: ${item.itemReason}</li>
+        <li class="item-cleanliness">Cleanliness:
         <select type="text" placeholder="Item Cleanliness" class="select-option-for-change" id="${item.id}">
           <option ` + (item.itemCleanliness.toLowerCase().indexOf('sparkling') !== -1 ? `selected `: ``) + `value="Sparkling">Sparkling</option>
           <option ` + (item.itemCleanliness.toLowerCase().indexOf('dusty') !== -1 ? `selected `: ``) + `value="Dusty">Dusty</option>
