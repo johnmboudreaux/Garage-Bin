@@ -97,7 +97,7 @@
         <li class="item-name">Item Name: ${item.itemName}</li>
         <li class="item-reason">Item Reason: ${item.itemReason}</li>
         <li class="item-cleanliness">Item Cleanliness:
-        <select type="text" placeholder="Item Cleanliness" class="select-option-for-change">
+        <select type="text" placeholder="Item Cleanliness" class="select-option-for-change" id="${item.id}">
           <option ` + (item.itemCleanliness.toLowerCase().indexOf('sparkling') !== -1 ? `selected ` : ``) + `value="Sparkling">Sparkling</option>
           <option ` + (item.itemCleanliness.toLowerCase().indexOf('dusty') !== -1 ? `selected ` : ``) + `value="Dusty">Dusty</option>
           <option ` + (item.itemCleanliness.toLowerCase().indexOf('rancid') !== -1 ? `selected ` : ``) + `value="Rancid">Rancid</option>
@@ -142,13 +142,12 @@
   };
 
   const changeCleanliness = event => {
-    let id = $(event.target).closest('.select-option-for-change').attr('id').split('-')[1];
-    console.log(id);
+    let id = $(event.target).closest('.select-option-for-change').attr('id');
     const itemCleanliness = $(event.target).val();
     let postBody = {
       itemCleanliness: itemCleanliness
     };
-    fetch('/api/v1/items/:id', {
+    fetch(`/api/v1/items/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
