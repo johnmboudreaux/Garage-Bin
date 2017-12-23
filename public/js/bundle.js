@@ -73,17 +73,17 @@
       rancidCount = 0,
       garageItems = [];
 
-  $('.show-garage').on('click', '.show-items-butn', event => openDoor(event));
+  $('.show-garage').on('click', '.show-items-btn', () => toggleDoorAndButtonText());
   $('.input-form').on('click', '.submit-button', () => addItem());
-  $('.show-garage').on('click', '.sort-items-up-butn', () => sortAsc());
-  $('.show-garage').on('click', '.sort-items-down-butn', () => sortDsc());
+  $('.show-garage').on('click', '.sort-items-up-btn', () => sortAsc());
+  $('.show-garage').on('click', '.sort-items-down-btn', () => sortDsc());
   $('.items').on('click', '.item-name', event => showDetails(event));
   $('.items').on('change', 'select', event => changeCleanliness(event));
 
   $(document).ready(() => fetchItems());
 
-  const openDoor = event => {
-    $('.slide-top').toggleClass("slide-open");
+  const toggleDoorAndButtonText = () => {
+    $('.slide-top').hasClass('slide-open') ? $('.show-items-btn').val('Show Items') && $('.slide-top').toggleClass("slide-open") : $('.show-items-btn').val('Hide Items') && $('.slide-top').toggleClass("slide-open");
   };
 
   const fetchItems = () => {
