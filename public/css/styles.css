@@ -20,7 +20,7 @@
 }
 
 body {
-  background-image: url('../assets/brown-siding.jpg');
+  background-image: url('../assets/bricks.jpg');
 }
 
 .counts {
@@ -105,10 +105,11 @@ body {
 }
 
 .slide-top{
-  background: url('../assets/garageDoor.gif');
+  background: url('../assets/graf-door.jpg');
   height: 100%;
   width: 100%;
-  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
   position: absolute;
   top: 0;
   left: 0;
@@ -118,7 +119,6 @@ body {
 .slide-top.slide-open {
   top: -65vh;
 }
-
 
 .show-all .item-reason {
   display: inline-block;
