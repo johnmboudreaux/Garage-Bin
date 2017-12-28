@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   margin: 5px 25px 12px 5px;
+  width: 20%;
 }
 
 .appended-items li {
@@ -42,13 +43,19 @@ body {
   font-size: .85em;
   height: 25px;
   width: 25vw;
+  margin: 5px;
+  padding: 3px 0 0 5px;
+}
+
+.input-form input[type=submit] {
+  width: 10%;
 }
 
 .input-form select {
-  background-color: #D1D2D3;
-  height: 29px;
+  height: 26px;
   font-size: .8em;
   overflow: hidden;
+  margin-top: 5px;
   width: 240px;
 }
 
@@ -82,8 +89,8 @@ body {
 
 .sliding-doors {
   background-color: #D1D2D3;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: [first] 100% [end];
   font-weight: bold;
   overflow: hidden;
   height: 65vh;
@@ -96,6 +103,11 @@ body {
   box-shadow:
   0 0 10px #000,
   0 0 0 5px #fff;
+}
+
+.sliding-doors p {
+  align-self: flex-end;
+  margin-bottom: 5px;
 }
 
 .sliding-doors ul {
